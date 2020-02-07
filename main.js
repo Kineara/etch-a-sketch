@@ -6,16 +6,21 @@ let resetBtn = document.getElementById('resetBtn');
 let divCount = 16;
 
 function createGrid() {
-    let divSize = 500 / divCount;
+    //let divSize = 500 / divCount;
+    let divSize = 100 / divCount
     let divTotal = divCount * divCount;
+    console.log(divTotal);
+    
     while(sketchpadContainer.firstChild) {
         sketchpadContainer.removeChild(sketchpadContainer.firstChild);
     }
         
     for (i = 0; i < divTotal; i++) {
         newDiv = document.createElement('div');
-        newDiv.style.width = divSize + "px";
-        newDiv.style.height = divSize + "px";
+        //newDiv.style.width = divSize + "px";
+        //newDiv.style.height = divSize + "px";
+        newDiv.style.width = divSize + "%";
+        newDiv.style.flexGrow = 1;
         newDiv.style.backgroundColor = "grey";
         sketchpadContainer.appendChild(newDiv);
     }

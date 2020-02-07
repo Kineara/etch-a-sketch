@@ -17,5 +17,9 @@ function createGrid() {
     }
 }
 
+createGrid();
 
-sketchpadContainer.addEventListener("mouseover", draw);
+
+sketchpadContainer.addEventListener("mouseover", function(e){
+    e.target.style.backgroundColor = "blue";
+});

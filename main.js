@@ -1,9 +1,10 @@
-function setSize() {
-    let gridSize;
-    do {gridSize = prompt("How many squares wide should the grid be? (1-64)");
-    }
-    while (gridSize < 1 || gridSize > 64);
-    divCount = gridSize;
+// Function Defs
+function randomRGB() {
+    // Return random rgb value string
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    startBackground = "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
 function createGrid() {
@@ -20,16 +21,17 @@ function createGrid() {
         newDiv = document.createElement('div');
         newDiv.style.width = divSize + "%";
         newDiv.style.flexGrow = 1;
-        newDiv.style.backgroundColor = "rgb(" + startBackground + ")";
+        newDiv.style.backgroundColor = startBackground;
         sketchpadContainer.appendChild(newDiv);
     }
 }
 
-function randomRGB() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return (r + ", " + g + ", " + b);
+function setSize() {
+    let gridSize;
+    do {gridSize = prompt("How many squares wide should the grid be? (1-64)");
+    }
+    while (gridSize < 1 || gridSize > 64);
+    divCount = gridSize;
 }
 
 function shadesRGB() {
@@ -57,13 +59,17 @@ function shadesRGB() {
     });
 }
 
+// Global Variables
 let sketchpadContainer = document.getElementById('sketchpadContainer');
 let resetBtn = document.getElementById('resetBtn');
 let divCount = 16;
-let startBackground = randomRGB();
+let startBackground
 
+// Initial default grid generation
+randomRGB();
 createGrid();
 
+// Buttons
 resetBtn.addEventListener("click", function(){
     setSize();
     createGrid();
@@ -71,8 +77,9 @@ resetBtn.addEventListener("click", function(){
 
 colorBtn.addEventListener("click", function(){
     setSize();
-    startBackground = randomRGB();
+    randomRGB();
     createGrid();
 });
 
+// Drawing
 shadesRGB();

@@ -1,14 +1,14 @@
-let sketchpadContainer = document.getElementById('sketchpadContainer');
-let resetBtn = document.getElementById('resetBtn');
-
-let divCount = 16;
-
-let startBackground = randomRGB();
+function setSize() {
+    let gridSize;
+    do {gridSize = prompt("How many squares wide should the grid be? (1-64)");
+    }
+    while (gridSize < 1 || gridSize > 64);
+    divCount = gridSize;
+}
 
 function createGrid() {
     let divSize = 100 / divCount
     let divTotal = divCount * divCount;
-    console.log(divTotal);
     
     // Clear sketchpad
     while(sketchpadContainer.firstChild) {
@@ -52,26 +52,27 @@ function shadesRGB() {
         rInc -= 26;
         gInc -= 26;
         bInc -= 26;
-
-        console.log(rInc, gInc, bInc);
     
         e.target.style.backgroundColor = "rgb(" + rInc + ", " + gInc + ", " + bInc + ")";
-    
     });
-
 }
+
+let sketchpadContainer = document.getElementById('sketchpadContainer');
+let resetBtn = document.getElementById('resetBtn');
+let divCount = 16;
+let startBackground = randomRGB();
 
 createGrid();
 
 resetBtn.addEventListener("click", function(){
-    divCount = prompt("How many squares wide should the grid be?");
+    setSize();
     createGrid();
 });
 
 colorBtn.addEventListener("click", function(){
-    divCount = prompt("How many squares wide should the grid be?");
+    setSize();
     startBackground = randomRGB();
     createGrid();
-})
+});
 
 shadesRGB();
